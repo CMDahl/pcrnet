@@ -7,18 +7,18 @@ import socket
 import importlib
 import os
 import sys
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath('Z:\faellesmappe\cmd\tfs\pcrnet'))
 sys.path.append(BASE_DIR)
 sys.path.append(os.path.join(BASE_DIR, 'models'))
 sys.path.append(os.path.join(BASE_DIR, 'utils'))
-import tf_util
+import utils.tf_util
 import helper
 import transforms3d.euler as t3d
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-log','--log_dir', required=True, default='log_PCRNet', help='Log dir [default: log]')
-parser.add_argument('-mode','--mode', required=True, type=str, default='no_mode', help='mode: train or test')
-parser.add_argument('-results','--results', required=True, type=str, default='best_model', help='Store the best model')
+parser.add_argument('-log','--log_dir', default='log_PCRNet', help='Log dir [default: log]')
+parser.add_argument('-mode','--mode', type=str, default='no_mode', help='mode: train or test')
+parser.add_argument('-results','--results',type=str, default='best_model', help='Store the best model')
 
 
 parser.add_argument('--gpu', type=int, default=0, help='GPU to use [default: GPU 0]')
@@ -39,6 +39,10 @@ parser.add_argument('--data_dict', type=str, default='car_data',help='Data used 
 parser.add_argument('--train_poses', type=str, default='itr_net_train_data45.csv', help='Poses for training')
 parser.add_argument('--eval_poses', type=str, default='itr_net_eval_data45.csv', help='Poses for evaluation')
 parser.add_argument('--feature_size', type=int, default=1024, help='Size of features extracted from PointNet')
+
+
+parser.parse_args()
+
 FLAGS = parser.parse_args()
 
 TRAIN_POSES = FLAGS.train_poses
